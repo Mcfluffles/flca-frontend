@@ -42,17 +42,17 @@
             <!---->
             <!--Current Rate Preview-->
             <!--<aside class="card rate-panel" aria-label="Current rate summary">
-            <div class="panel-label">Current SCU Rate</div>-->
+        <div class="panel-label">Current SCU Rate</div>-->
             <!--<div class="big-rate">6,000 <span>CIS / SCU, or </span>2,400 <span>CAT / SCU</span></div>-->
             <!--<div class="metric-grid">
-                    <div class="metric"><b>6000</b><span>CIS per SCU</span></div>
-                    <div class="metric"><b>2400</b><span>CAT per SCU</span></div>
-                    <div class="metric"><b>500 t</b><span>Max weight per SCU</span></div>
-                    <div class="metric"><b>500 m³</b><span>Max volume per SCU</span></div>
-                    <div class="metric"><b>1 SCU</b><span>Minimum shipment</span></div>
-                    <div class="metric"><b>+ Fuel</b><span>Route surcharge separate</span></div>
-            </div>
-            </aside>-->
+                <div class="metric"><b>6000</b><span>CIS per SCU</span></div>
+                <div class="metric"><b>2400</b><span>CAT per SCU</span></div>
+                <div class="metric"><b>500 t</b><span>Max weight per SCU</span></div>
+                <div class="metric"><b>500 m³</b><span>Max volume per SCU</span></div>
+                <div class="metric"><b>1 SCU</b><span>Minimum shipment</span></div>
+                <div class="metric"><b>+ Fuel</b><span>Route surcharge separate</span></div>
+        </div>
+        </aside>-->
 
             <aside class="card rate-panel" aria-label="Current rate summary">
                 <div class="panel-label">Current SCU Rate</div>
@@ -101,6 +101,40 @@
             </div>
         </section>
         <!---->
+
+        <section class="card section" id="quote">
+            <div class="section-header">
+                <div>
+                    <h2>Quote Calculator</h2>
+                    <p>Estimate standard FLN freight pricing from SCUs and route fuel.</p>
+                </div>
+            </div>
+
+            <div class="grid-3">
+                <div class="mini-card">
+                    <div class="kicker">SCUs</div>
+                    <input id="quote-scus" type="number" min="1" value="1">
+                </div>
+
+                <div class="mini-card">
+                    <div class="kicker">Route</div>
+                    <select id="quote-route"></select>
+                </div>
+
+                <div class="mini-card">
+                    <div class="kicker">Currency</div>
+                    <select id="quote-currency">
+                        <option value="cis">CIS</option>
+                        <option value="cat">CAT</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="formula" id="quote-result">
+                Select a route to calculate a quote.
+            </div>
+        </section>
+
         <!--Route Table-->
         <section class="card section">
             <div class="section-header">
@@ -117,8 +151,6 @@
         </section>
 
         <!--Planetary Delivery Table-->
-
-
         <!---->
 
         <section class="card section">
@@ -139,40 +171,40 @@
 
         <!--fleet section-->
         <!--<section class="card section" id="fleet">
-          <div class="section-header">
-            <div>
-              <h2>Fleet Status</h2>
-              <p>FLN dispatch assigns vessels based on available capacity, route requirements, and cargo constraints.</p>
-            </div>
-          </div>
+      <div class="section-header">
+        <div>
+          <h2>Fleet Status</h2>
+          <p>FLN dispatch assigns vessels based on available capacity, route requirements, and cargo constraints.</p>
+        </div>
+      </div>
 
-          <div class="table-wrap">
-          <table>
-            <thead>
-              <tr>
-                  <th>Vessel Class</th>
-                  <th>Capacity</th>
-                  <th>Role</th>
-                  <th>Status</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                  <td><strong>Courier</strong></td>
-                  <td>500 t / 500 m³</td>
-                  <td>Small freight, flexible dispatch, partial loads.</td>
-                  <td><span class="tag">Active</span></td>
-              </tr>
-              <tr>
-                  <td><strong>Freighter</strong></td>
-                  <td>3,000 t / 1,000 m³</td>
-                  <td>Bulk mass transport and multi-SCU consolidation.</td>
-                  <td><span class="tag">Active</span></td>
-              </tr>
-            </tbody>
-          </table>
-          </div>
-        </section>-->
+      <div class="table-wrap">
+      <table>
+        <thead>
+          <tr>
+              <th>Vessel Class</th>
+              <th>Capacity</th>
+              <th>Role</th>
+              <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+              <td><strong>Courier</strong></td>
+              <td>500 t / 500 m³</td>
+              <td>Small freight, flexible dispatch, partial loads.</td>
+              <td><span class="tag">Active</span></td>
+          </tr>
+          <tr>
+              <td><strong>Freighter</strong></td>
+              <td>3,000 t / 1,000 m³</td>
+              <td>Bulk mass transport and multi-SCU consolidation.</td>
+              <td><span class="tag">Active</span></td>
+          </tr>
+        </tbody>
+      </table>
+      </div>
+    </section>-->
         <!---->
 
 
