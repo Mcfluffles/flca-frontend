@@ -364,3 +364,4 @@ FodyWeavers.xsd
 
 pflo-index-polished.html
 .vs/
+node_modules/

@@ -1,0 +1,1 @@
+export { buildRouteTable } from "./buildRouteTable.js";
