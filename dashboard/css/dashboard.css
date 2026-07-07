@@ -315,6 +315,19 @@ h2 {
     min-width: 1200px;
 }
 
+.company-tables {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+
+.card-section {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+    margin-bottom: 22px;
+}
+
 .table-wrap {
     overflow-x: auto;
     border: 1px solid var(--border);
