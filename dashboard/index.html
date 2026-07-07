@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Information, tables, and data for FLCA use." />
+    <title>FLCA Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<!--Top Bar Navigation-->
+
+<body>
+    <main class="site">
+        <header class="topbar">
+            <a href="#top" class="brand" aria-label="FLCA home">
+                <div class="mark">FLCA</div>
+                <div>
+                    <div class="brand-title">FLCA</div>
+                    <div class="brand-subtitle">Feline Commerce Authority</div>
+                </div>
+            </a>
+            <nav aria-label="Primary navigation">
+                <a href="#member-production-table">Company Net Production</a>
+                <!--<a href="#routes">Routes</a>-->
+                <!--<a href="#fleet">Fleet</a>-->
+                <!--<a href="#terms">Terms</a>-->
+            </nav>
+        </header>
+        <!---->
+        <!--Hero Section-->
+        <section class="hero" id="top">
+            <div class="card hero-main">
+                <div class="eyebrow"><span class="status-dot"></span>Internal Data Ready</div>
+                <h1>FLCA Dashboard</h1>
+                <p class="hero-copy">lorem ipsum and shit</p>
+                <div class="hero-actions">
+                    <a class="button primary" href="#member-production-table">Check Net Production</a>
+                    <!--<a class="button" href="#routes">Check Routes</a>-->
+                </div>
+            </div>
+            <!---->
+            <!--Current Rate Preview-->
+            <!--<aside class="card rate-panel" aria-label="Current rate summary">
+            <div class="panel-label">Current SCU Rate</div>-->
+            <!--<div class="big-rate">6,000 <span>CIS / SCU, or </span>2,400 <span>CAT / SCU</span></div>-->
+            <!--<div class="metric-grid">
+                    <div class="metric"><b>6000</b><span>CIS per SCU</span></div>
+                    <div class="metric"><b>2400</b><span>CAT per SCU</span></div>
+                    <div class="metric"><b>500 t</b><span>Max weight per SCU</span></div>
+                    <div class="metric"><b>500 m³</b><span>Max volume per SCU</span></div>
+                    <div class="metric"><b>1 SCU</b><span>Minimum shipment</span></div>
+                    <div class="metric"><b>+ Fuel</b><span>Route surcharge separate</span></div>
+            </div>
+            </aside>-->
+
+            <aside class="card rate-panel" aria-label="Current rate summary">
+                <div class="panel-label">Current SCU Rate</div>
+                <div class="big-rate">6,000 / 2,400 <span>CIS / CAT per SCU</span></div>
+                <div class="metric-grid">
+                    <div class="metric"><b>500 t</b><span>Max weight per SCU</span></div>
+                    <div class="metric"><b>500 m³</b><span>Max volume per SCU</span></div>
+                    <div class="metric"><b>1 SCU</b><span>Minimum shipment</span></div>
+                    <div class="metric"><b>+ Fuel</b><span>Route cost separate</span></div>
+                </div>
+            </aside>
+        </section>
+
+        <!---->
+        <!--SCU Explanation-->
+        <!--<section class="card section" id="rates">
+            <div class="section-header">
+                <div>
+                    <h2>Standard Cargo Unit</h2>
+                    <p>Customers purchase freight capacity in standardized cargo blocks. FLN dispatching may consolidate or split blocks between vessels as needed.</p>
+                </div>-->
+                <!--<span class="tag">Active tariff</span>-->
+            <!--</div>-->
+
+            <!--<div class="grid-3">
+                <article class="mini-card">
+                    <div class="kicker">Unit</div>
+                    <h3>1 SCU</h3>
+                    <p>Up to 500 tonnes and up to 500 m³ of cargo.</p>
+                </article>
+                <article class="mini-card">
+                    <div class="kicker">Freight Charge</div>
+                    <h3>6,000 CIS or 2,400 CAT</h3>
+                    <p>Flat service charge per SCU before route fuel.</p>
+                </article>
+                <article class="mini-card">
+                    <div class="kicker">Minimum</div>
+                    <h3>1 SCU</h3>
+                    <p>Small shipments are accepted, but billed as one full SCU.</p>
+                </article>
+            </div>
+
+            <div class="formula">
+                Standard Route Quote = (SCUs × SCU Rate CIS or CAT) + Route Table Fuel Cost
+                <span>SCUs required = greater of cargo tonnes ÷ 500 or cargo m³ ÷ 500, rounded up.</span>
+            </div>
+        </section>-->
+        <!---->
+
+        <section class="card section">
+
+            <div class="section-header">
+                <div>
+                    <h2>Company Net Production</h2>
+                    <p>This table displays the top produced items per company in the FLCA. Only items which are produced in excess are considered.</p>
+                </div>
+            </div>
+
+            <div class="table-wrap">
+                <table id="member-production-table"></table>
+            </div>
+
+        </section>
+
+        <footer>
+            <div>FLN — Felidae Logistics Network</div>
+            <div>Site last updated: 3026-07-06</div>
+        </footer>
+    </main>
+
+    <script type="module" src="../js/dashboard.js"></script>
+</body>
+</html>
