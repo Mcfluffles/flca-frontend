@@ -232,6 +232,25 @@ h1 {
         font-weight: 700;
     }
 
+#quote-result a {
+    color: var(--accent);
+    font-weight: 800;
+}
+
+    #quote-result a:hover {
+        text-decoration: underline;
+    }
+
+.transfer-warning {
+    color: var(--accent-2);
+    font-weight: 800;
+}
+
+.minimum-warning {
+    color: #f6c177;
+    font-weight: 700;
+}
+
 input,
 select {
     width: 100%;

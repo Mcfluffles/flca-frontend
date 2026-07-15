@@ -6,8 +6,17 @@
 //@ts-check
 
 import { findRouteChain } from "./findRouteChain.js";
+import { findEndToEndOperators } from "./findEndToEndOperators.js";
+import { findOperatorsByLeg } from "./findOperatorsByLeg.js";
+import { getOperatorDetails } from "./getOperatorDetails.js";
 
-export function buildQuoteCalculator(routes, serviceLevels) {
+export function buildQuoteCalculator(
+    routes,
+    serviceLevels,
+    operators,
+    operatorRoutes
+) {
+
     const originSelect =
         document.getElementById("quote-origin");
 
@@ -73,6 +82,22 @@ export function buildQuoteCalculator(routes, serviceLevels) {
         destinationSelect.selectedIndex = 1;
     }
 
+    function renderOperatorLink(operator) {
+        if (operator.ContactURL) {
+            return `
+            <a
+                href="${operator.ContactURL}"
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                ${operator.OperatorName}
+            </a>
+        `;
+        }
+
+        return operator.OperatorName;
+    }
+
     function calculateQuote() {
         const origin = originSelect.value;
         const destination = destinationSelect.value;
@@ -95,6 +120,85 @@ export function buildQuoteCalculator(routes, serviceLevels) {
                 `No established route is currently available from ${origin} to ${destination}.`;
 
             return;
+        }
+
+        const routeMinimumSCU = Math.max(
+            ...routeChain.map(leg => Number(leg.minimum_scu) || 1)
+        );
+
+        const requestedSCUs = Math.max(
+            1,
+            Math.ceil(Number(scuInput.value) || 1)
+        );
+
+        const billableSCUs = Math.max(
+            requestedSCUs,
+            routeMinimumSCU
+        );
+
+        const endToEndOperatorCodes =
+            findEndToEndOperators(
+                routeChain,
+                operatorRoutes
+            );
+
+        const endToEndOperators =
+            getOperatorDetails(
+                endToEndOperatorCodes,
+                operators
+            );
+
+        const operatorsByLeg =
+            findOperatorsByLeg(
+                routeChain,
+                operatorRoutes
+            );
+
+        let operatorHtml = "";
+
+        if (endToEndOperators.length > 0) {
+            operatorHtml = `
+        <span>
+            Matching network carriers:
+            ${endToEndOperators
+                    .map(operator => `<strong>${operator.OperatorCode}</strong>`)
+                    .join(", ")}
+        </span>
+    `;
+        } else {
+            const legHtml = operatorsByLeg
+                .map(leg => {
+                    const legOperators = getOperatorDetails(
+                        leg.OperatorCodes,
+                        operators
+                    );
+
+                    const names =
+                        legOperators.length > 0
+                            ? legOperators
+                                .map(operator => operator.OperatorCode)
+                                .join(", ")
+                            : "No participating carrier";
+
+                    return `
+                <span>
+                    ${leg.OriginCode}
+                    →
+                    ${leg.DestinationCode}:
+                    ${names}
+                </span>
+            `;
+                })
+                .join("");
+
+            operatorHtml = `
+        <span class="transfer-warning" style="color: #ff7b72; font-weight: 800;">
+            No single carrier currently offers this route end to end.
+            Separate contracts and a customer-managed transfer are required.
+        </span>
+
+        ${legHtml}
+    `;
         }
 
         const service =
@@ -124,9 +228,20 @@ export function buildQuoteCalculator(routes, serviceLevels) {
             0
         );
 
-        const freightCharge = scus * serviceRate;
+        const freightCharge = billableSCUs * serviceRate;
         const total = freightCharge + routeCharge;
         const currencyLabel = currency.toUpperCase();
+
+        const minimumNotice =
+            requestedSCUs < routeMinimumSCU
+                ? `
+            <span class="minimum-warning" style="color: #f6c177;">
+                This route has a ${routeMinimumSCU} SCU minimum.
+                Your ${requestedSCUs} SCU shipment is billed as
+                ${billableSCUs} SCUs.
+            </span>
+        `
+                : "";
 
         const routePath = [
             routeChain[0].origin_code,
@@ -146,12 +261,14 @@ export function buildQuoteCalculator(routes, serviceLevels) {
             </span>
 
             <span>
-                Freight:
-                ${scus} SCU ×
+                 Freight:
+                ${billableSCUs} SCU ×
                 ${serviceRate.toLocaleString()} ${currencyLabel}
                 =
                 ${freightCharge.toLocaleString()} ${currencyLabel}
             </span>
+
+            ${minimumNotice}
 
             <span>
                 Route charges:
@@ -161,12 +278,14 @@ export function buildQuoteCalculator(routes, serviceLevels) {
             <span>
                 Delivery target:
                 within ${service.DeliveryDays} days
-            </span
+            </span>
 
             <strong>
                 ${service.ServiceName} Quote:
                 ${total.toLocaleString()} ${currencyLabel}
             </strong>
+
+            ${operatorHtml}
         `;
     }
 

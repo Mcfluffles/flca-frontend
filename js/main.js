@@ -1,26 +1,56 @@
 //@ts-check
 
-//imports
 import * as afunc from "./index.js";
 
 async function main() {
+    const [
+        routes,
+        serviceLevels,
+        operators,
+        operatorRoutes
+    ] = await Promise.all([
+        afunc.pullFLNRoutes(),
+        afunc.pullServiceLevels(),
+        afunc.pullOperators(),
+        afunc.pullOperatorRoutes()
+    ]);
 
-//Pull FLN established route data
-    const [routes, serviceLevels] = await Promise.all(
-        [
-            afunc.pullFLNRoutes(),
-            afunc.pullServiceLevels()
-        ]
+    console.log({
+        routes,
+        serviceLevels,
+        operators,
+        operatorRoutes
+    });
+
+    // Build tables first while debugging
+    afunc.buildRouteTable(
+        "ben-planetary-table",
+        routes,
+        "Planetary",
+        "BEN"
     );
 
-//Call and build the quote calculator
-afunc.buildQuoteCalculator(routes, serviceLevels);
+    afunc.buildRouteTable(
+        "arc-planetary-table",
+        routes,
+        "Planetary",
+        "ARC"
+    );
 
-//Call and build the route tables
-afunc.buildRouteTable("ben-planetary-table", routes, "Planetary", "BEN");
-afunc.buildRouteTable("arc-planetary-table", routes, "Planetary", "ARC");
-afunc.buildRouteTable("exchange-table", routes, "Exchange");
+    afunc.buildRouteTable(
+        "exchange-table",
+        routes,
+        "Exchange"
+    );
 
+    afunc.buildQuoteCalculator(
+        routes,
+        serviceLevels,
+        operators,
+        operatorRoutes
+    );
 }
 
-main();
+main().catch(err => {
+    console.error("Frontend initialization failed:", err);
+});

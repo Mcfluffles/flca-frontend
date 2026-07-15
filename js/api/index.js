@@ -11,3 +11,5 @@ export { pullInternalTradeOpportunities } from "./pullInternalTradeOpportunities
 
 //Routing and Pricing
 export { pullServiceLevels } from "./pullServiceLevels.js";
+export { pullOperators } from "./pullOperators.js";
+export { pullOperatorRoutes } from "./pullOperatorRoutes.js";
